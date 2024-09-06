@@ -11,11 +11,9 @@ public class loginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get username and password from the HTML form
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Define CSS as a string variable
         String css = "body { background: linear-gradient(135deg, #000,#333); font-family: Arial, sans-serif; margin: 0; }"
                    + ".container { margin-top: 100px; text-align: center; color: white; }"
                    + ".container h1 { font-size: 48px; animation: fadeIn 1s ease-in-out; }"
@@ -26,12 +24,9 @@ public class loginServlet extends HttpServlet {
                    + "a:hover { background-color: #0056b3; transition: 0.3s; }"
                    + ".error-box { background-color: #ff4b4b; padding: 20px; border-radius: 10px; display: inline-block; color: white; }"
                    + "@keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); } }";
-
-        // Set response content type    
+   
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
-        // Constraints: Username must be 3-15 characters and alphanumeric, password must be 8-20 characters
         if (isValidUsername(username) && isValidPassword(password)) {
             out.println("<html>");
             out.println("<head><title>Login Successful</title>");
@@ -56,12 +51,10 @@ public class loginServlet extends HttpServlet {
         out.close();
     }
 
-    // Method to validate the username (3-15 characters, alphanumeric)
     private boolean isValidUsername(String username) {
         return username != null && username.matches("^[a-zA-Z0-9]{3,15}$");
     }
 
-    // Method to validate the password (8-20 characters, at least one digit and one special character)
     private boolean isValidPassword(String password) {
         return password != null && password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$");
     }
