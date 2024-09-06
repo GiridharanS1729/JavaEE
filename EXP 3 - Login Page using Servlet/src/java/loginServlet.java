@@ -16,7 +16,7 @@ public class loginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         // Define CSS as a string variable
-        String css = "body { background: linear-gradient(135deg, #ff6f4b, #fec37b); font-family: Arial, sans-serif; margin: 0; }"
+        String css = "body { background: linear-gradient(135deg, #000,#333); font-family: Arial, sans-serif; margin: 0; }"
                    + ".container { margin-top: 100px; text-align: center; color: white; }"
                    + ".container h1 { font-size: 48px; animation: fadeIn 1s ease-in-out; }"
                    + ".container p { font-size: 20px; margin-top: 20px; }"
@@ -31,7 +31,8 @@ public class loginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        if ("g".equals(username) && "g".equals(password)) {
+        // Constraints: Username must be 3-15 characters and alphanumeric, password must be 8-20 characters
+        if (isValidUsername(username) && isValidPassword(password)) {
             out.println("<html>");
             out.println("<head><title>Login Successful</title>");
             out.println("<style>" + css + "</style></head>");
@@ -46,12 +47,22 @@ public class loginServlet extends HttpServlet {
             out.println("<style>" + css + "</style></head>");
             out.println("<body>");
             out.println("<div class='container'><h1>Login Failed</h1>");
-            out.println("<div class='error-box'><p>Invalid username or password.</p></div>");
+            out.println("<div class='error-box'><p>Invalid username or password.</p></div><br/>");
             out.println("<a href='index.html'>Try Again</a></div>");
             out.println("</body>");
             out.println("</html>");
         }
 
         out.close();
+    }
+
+    // Method to validate the username (3-15 characters, alphanumeric)
+    private boolean isValidUsername(String username) {
+        return username != null && username.matches("^[a-zA-Z0-9]{3,15}$");
+    }
+
+    // Method to validate the password (8-20 characters, at least one digit and one special character)
+    private boolean isValidPassword(String password) {
+        return password != null && password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$");
     }
 }
