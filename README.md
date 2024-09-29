@@ -1,1 +1,1 @@
-# JavaEE
+# Java Enterprise Edition
