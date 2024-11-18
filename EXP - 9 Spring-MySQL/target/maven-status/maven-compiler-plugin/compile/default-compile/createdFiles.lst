@@ -1,0 +1,6 @@
+com\giridharan\todo\model\Entity.class
+com\giridharan\todo\model\User.class
+com\giridharan\todo\controller\UserController.class
+com\giridharan\todo\repository\UserRepository.class
+com\giridharan\todo\DemoApplication.class
+com\giridharan\todo\service\UserService.class
